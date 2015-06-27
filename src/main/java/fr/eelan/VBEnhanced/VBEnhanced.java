@@ -5,11 +5,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class VBEnhanced extends JavaPlugin {
 	private VBBorderManager worldBorder = new VBBorderManager(this);
+	//private Localisation loc = new Localisation(getConfig().getString("language"));
 	
 	public void onEnable(){
+		saveDefaultConfig();
 		PluginDescriptionFile pdf = this.getDescription();
-		this.getLogger().info("Vanilla Border Enhanced " + pdf.getVersion() + " has been loaded");
 		
+		this.getLogger().info("Vanilla Border Enhanced " + pdf.getVersion() + " has been loaded");
 		getCommand("wb").setExecutor(new VBCommand(this));
 	}
 	
@@ -25,5 +27,13 @@ public class VBEnhanced extends JavaPlugin {
 	public void setWB(VBBorderManager worldBorder) {
 		this.worldBorder = worldBorder;
 	}
+/*
+	public Localisation getLoc() {
+		return loc;
+	}
 
+	public void setLoc(Localisation loc) {
+		this.loc = loc;
+	}
+*/
 }

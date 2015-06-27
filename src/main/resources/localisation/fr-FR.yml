@@ -1,1 +1,10 @@
-NO_PERMISSION: Vous n'êtes autorisé à exécuter cette Commande.
+author: Eelan
+
+# Message de Permission
+NO_PERMISSION: "Vous n'êtes autorisé à exécuter cette Commande."
+NOT_PLAYER: "."
+
+INFO_BORDER_1: "Coordonnées du centre :"
+INFO_BORDER_2: "Taille de la bordure :"
+
+# Message d'aide

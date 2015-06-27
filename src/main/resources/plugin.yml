@@ -3,3 +3,8 @@ version: 0.1
 main: fr.eelan.VBEnhanced.VBEnhanced
 website: https://github.com/Eelan/VBEnhanced
 author: Eelan
+commands:
+  wb:
+    description: Commande WorldBorder
+    permission: vbenhanced.vb
+    usage: Syntax Error ! type /wb to know more.

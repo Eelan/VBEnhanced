@@ -12,11 +12,11 @@ public class VBCommand implements CommandExecutor {
 	 * /wb set [taille] ([reductionTime]) (-force)
 	 * /wb get
 	 * /wb setcenter ([CoordX]) ([CoordZ])
-	 * /wb add [timeToChange] [taille] ([reductionTime]) (-warning) (X) (-force)
+	 * /wb add [timeToChange] [taille] ([reductionTime]) (-warning) (-force)
 	 * /wb list
 	 * /wb clear
 	 * /wb del [ID]
-	 * /wb fill
+	 * /wb fill [confirm]
 	 * /wb warning [taille] [timeToChange] (X)
 	 * /wb getplayer [taille]
 	 * 
@@ -32,6 +32,11 @@ public class VBCommand implements CommandExecutor {
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] arg) {
+		boolean helpMessage = false;
+		double coordX = 0;
+		double coordZ = 0;
+		
+		
 		if(!sender.isOp() || !sender.hasPermission("vbenhanced.vb"))
 			sender.sendMessage(Localisation.NO_PERMISSION);
 		else{
@@ -41,19 +46,44 @@ public class VBCommand implements CommandExecutor {
 				Player player = (Player) sender;
 				switch(arg[0]){
 				case "set":
+					if(!setCmd(sender, arg)){
+						/* Message d'aide */
+					}
 					break;
 				case "setcenter":
+					if(!setCenter(sender, arg)){
+						/* Message d'aide */
+					}
 					break;
 				case "get":
-					plugin.getWB().infoBorder(player);
+					if(arg.length == 1){
+						plugin.getWB().infoBorder(sender);
+					}else{
+						/* Message d'aide */
+					}
+						
 					break;
 				case "add":
+					if(!addCmd(sender, arg)){
+						/* Message d'aide */
+					}
 					break;
 				case "list":
+					if(arg.length == 1){
+						/* Commande */
+					}else{
+						/* Message d'aide*/
+					}
 					break;
 				case "clear":
+					if(arg.length == 1){
+						/* Commande */
+					}else{
+						/* Message d'aide */ 
+					}
 					break;
 				case "del":
+					
 					break;
 				case "fill":
 					break;
@@ -68,5 +98,126 @@ public class VBCommand implements CommandExecutor {
 		}
 		return false;
 	}
+	
+	private boolean setCenter(CommandSender sender, String arg[]){
+		// /wb setcenter ([CoordX] [CoordZ])
+		Player player = (Player) sender;
+		double coordX = 0;
+		double coordZ = 0;
+		
+		if(arg.length == 1){
+			if(isPlayer(sender)){
+				coordX = player.getLocation().getX();
+				coordZ = player.getLocation().getZ();				
+			}else
+				return true; // Logique ? Bon on verra...
+		}else if(arg.length == 3){
+			try{
+				coordX = Double.parseDouble(arg[1]);
+				coordZ = Double.parseDouble(arg[2]);
+			}catch(NumberFormatException ex){
+				return false;
+			}
+		}else
+			return false;
+		
+		plugin.getWB().setCenter(coordX, coordZ);
+		return true;
+	}
+	
+	private boolean setCmd(CommandSender sender, String arg[]){
+		// /wb set [taille] ([reductionTime]) (-force)
+		long reductionTime = 30;
+		boolean force = false;
+		double taille = 2000;
+		
+		if(!(arg.length >= 2 && arg.length <= 4))
+			return false;
+		else{
+			if(arg.length == 4){
+				if(arg[3].equalsIgnoreCase("-force"))
+					force = true;
+				else
+					return false;
+			}
+			if(arg.length >= 3){
+				try{
+					reductionTime = Long.parseLong(arg[2]);
+				}catch(NumberFormatException ex){
+					return false;
+				}
+			}
+			try{
+				taille = Double.parseDouble(arg[1]);
+			}catch(NumberFormatException ex){
+				return false;
+			}				
+		}
+		// Méthode à coder pour exécuter la commande
+		return true;
+	}
+	
+	private boolean addCmd(CommandSender sender, String arg[]){
+		// /wb add [timeToChange] [taille] ([reductionTime]) (-warning) (-force)
 
+		long timeToChange, reductionTime, freqWarning;
+		double taille;
+		boolean warning, force;
+		
+		if(!(arg.length >= 3 && arg.length <= 7)){
+			return false;
+		}else{
+			try{
+				timeToChange = Long.parseLong(arg[1]);
+				taille = Double.parseDouble(arg[2]);
+			}catch(NumberFormatException ex){
+				return false;
+			}
+			for(int i = 3 ; i < arg.length ; i++){
+				switch(arg[i]){
+				case "-warning": case "-w":
+					warning = true;
+					break;
+				case "-force": case "-f":
+					force = true;
+					break;
+				default:
+					try{
+						reductionTime = Long.parseLong(arg[i]);
+					}catch(NumberFormatException ex){
+						return false;
+					}
+				}
+			}
+		}
+		
+		/* Commande à coder */
+		return true;
+	}
+
+	private boolean fillCmd(CommandSender sender){
+		 // /wb fill [confirm]
+				 
+
+		return true;
+	}
+	
+	private boolean getPlayer(CommandSender sender, String[] arg){
+		// /wb getplayer [taille]
+		return true;
+	}
+	
+	private boolean warningCmd(CommandSender sender, String[] arg){
+		// /wb warning [taille] [timeToChange] (X)
+		
+		return true;
+	}
+	
+	private boolean isPlayer(CommandSender sender){
+		if(!(sender instanceof Player)){
+			sender.sendMessage("Vous n'êtes pas un joueur");
+			return false;
+		}
+		return true;
+	}
 }
