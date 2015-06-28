@@ -1,38 +1,38 @@
 # VBEnhanced
 Vanilla Border Enhanced
--= EN =- 
-	This description will be translate as soon as possible.
+##-= EN =- 
+	This description will be translate as soon as possible.  
 	
--= FR =-
-Ce plugin est en cours de réalisation, et non encore opérationnel.
-Il a pour but d'ajouter quelques fonctionnalités interessantes aux bordures Vanilla.
+##-= FR =-  
+Ce plugin est en cours de rÃ©alisation, et non encore opÃ©rationnel.  
+Il a pour but d'ajouter quelques fonctionnalitÃ©s interessantes aux bordures Vanilla.  
 
 ##Commandes
 	
- -'/wb set [taille] ([reductionTime]) (-force)'
-	 	Réduire ou augmenter la bordure jusqu'à [taille].
-	 	[reductionTime] permet de spécifier le temp en seconde que mettra la bordure à réduire/augmenter.
-	 	-force indiquera que la commande doit être exécuter, même si des joueurs se trouvent à l'extérieur de la bordure.
+ - '/wb set [taille] ([reductionTime]) (-force)'  
+	 	RÃ©duire ou augmenter la bordure jusqu'Ã  [taille].
+	 	[reductionTime] permet de spÃ©cifier le temp en seconde que mettra la bordure Ã  rÃ©duire/augmenter.
+	 	-force indiquera que la commande doit Ãªtre exÃ©cuter, mÃªme si des joueurs se trouvent Ã  l'extÃ©rieur de la bordure.
 	 
- -'/wb get'
-	 	Connaitre la taille de la bordure, et ses coordonnées	
- -'/wb setcenter ([CoordX]) ([CoordZ])'
-	 	Définition du centre de la bordure.
-	 	Si [CoordX] et [CoordZ] ne sont pas spécifiées, elle sera défini à la position de l'executeur de la commande.
- -'/wb add [timeToChange] [taille] ([reductionTime]) (-warning)(-force)'
-	 	Programme un futur changement de bordure dans [timeToChange] minutes.
-		-warning indique qu'un "warning" sera effectué toutes les X secondes (défini par défaut dans la config si non spécifié) à tous les joueurs non présent dans la limite.
- -'/wb list'
-	 	Liste les futurs changement de bordure sous cette forme :
-	 		ID : Taille - Temps
- -'/wb clear'
-	 	Supprime tout les futurs changement
- -'/wb del [ID]'
-	 	Supprime le changement avec le numéro [ID]
- -'/wb fill'
-	 	Prégénère la totalité des chunk présent à l'intérieur de la bordure.
- -'/wb warning [taille] [timeToChange] (X)'
-	 	Simple warning d'un futur changement de bordure (sans application auto à la fin)
- -'/wb getplayer [taille]'
-	 	Lister les joueurs hors des limites [taille]
+ - '/wb get'  
+	 	Connaitre la taille de la bordure, et ses coordonnÃ©es  	
+ - '/wb setcenter ([CoordX]) ([CoordZ])'  
+	 	DÃ©finition du centre de la bordure.  
+	 	Si [CoordX] et [CoordZ] ne sont pas spÃ©cifiÃ©es, elle sera dÃ©fini Ã  la position de l'executeur de la commande.  
+ - '/wb add [timeToChange] [taille] ([reductionTime]) (-warning)(-force)'  
+	 	Programme un futur changement de bordure dans [timeToChange] minutes.  
+		-warning indique qu'un "warning" sera effectuÃ© toutes les X secondes (dÃ©fini par dÃ©faut dans la config si non spÃ©cifiÃ©) Ã  tous les joueurs non prÃ©sent dans la limite.  
+ - '/wb list'  
+	 	Liste les futurs changement de bordure sous cette forme :  
+	 		ID : Taille - Temps  
+ - '/wb clear'  
+	 	Supprime tout les futurs changement  
+ - '/wb del [ID]'  
+	 	Supprime le changement avec le numÃ©ro [ID]  
+ - '/wb fill'  
+	 	PrÃ©gÃ©nÃ¨re la totalitÃ© des chunk prÃ©sent Ã  l'intÃ©rieur de la bordure.  
+ - '/wb warning [taille] [timeToChange] (X)'  
+	 	Simple warning d'un futur changement de bordure (sans application auto Ã  la fin)  
+ - '/wb getplayer [taille]'  
+	 	Lister les joueurs hors des limites [taille]  
 	 	
