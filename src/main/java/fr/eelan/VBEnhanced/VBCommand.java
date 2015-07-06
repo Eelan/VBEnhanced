@@ -1,5 +1,7 @@
 package fr.eelan.VBEnhanced;
 
+import java.util.ArrayList;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -10,15 +12,15 @@ public class VBCommand implements CommandExecutor {
 			
 	/* TODO
 	 * /wb set [taille] ([reductionTime]) (-force)
-	 * /wb get
-	 * /wb setcenter ([CoordX]) ([CoordZ])
+	 * /wb get																			OK
+	 * /wb setcenter ([CoordX]) ([CoordZ])												OK
 	 * /wb add [timeToChange] [taille] ([reductionTime]) (-warning) (-force)
 	 * /wb list
 	 * /wb clear
 	 * /wb del [ID]
 	 * /wb fill [confirm]
 	 * /wb warning [taille] [timeToChange] (X)
-	 * /wb getplayer [taille]
+	 * /wb getplayer [taille]															OK
 	 * 
 	 * A planifier ?
 	 * Ajout des damage buffer, damage amount...
@@ -43,7 +45,6 @@ public class VBCommand implements CommandExecutor {
 			if(arg.length == 0){
 				/* Afficher l'aide VBEnhanced */
 			}else{
-				Player player = (Player) sender;
 				switch(arg[0]){
 				case "set":
 					if(!setCmd(sender, arg)){
@@ -90,6 +91,9 @@ public class VBCommand implements CommandExecutor {
 				case "warning":
 					break;
 				case "getplayer":
+					if(!getPlayer(sender, arg)){
+						/* Message d'aide */
+					}
 					break;
 				default:
 					/* Afficher l'aide VBEnhanced */
@@ -134,24 +138,23 @@ public class VBCommand implements CommandExecutor {
 		if(!(arg.length >= 2 && arg.length <= 4))
 			return false;
 		else{
-			if(arg.length == 4){
-				if(arg[3].equalsIgnoreCase("-force"))
-					force = true;
-				else
-					return false;
-			}
-			if(arg.length >= 3){
-				try{
-					reductionTime = Long.parseLong(arg[2]);
-				}catch(NumberFormatException ex){
-					return false;
-				}
-			}
 			try{
 				taille = Double.parseDouble(arg[1]);
 			}catch(NumberFormatException ex){
 				return false;
-			}				
+			}
+			for(int i=2; i < arg.length; i++){
+				switch(arg[i]){
+				case "-force": case "-f":
+					break;
+				default:
+					try{
+						reductionTime = Long.parseLong(arg[2]);
+					}catch(NumberFormatException ex){
+						return false;
+					}
+				}
+			}
 		}
 		// Méthode à coder pour exécuter la commande
 		return true;
@@ -204,6 +207,19 @@ public class VBCommand implements CommandExecutor {
 	
 	private boolean getPlayer(CommandSender sender, String[] arg){
 		// /wb getplayer [taille]
+		ArrayList<Player> playerOut = new ArrayList<>();
+		double size = 0;
+		try{
+			size = Double.parseDouble(arg[1]);
+		}catch(NumberFormatException ex){
+			sender.sendMessage("[taille] doit être un nombre !");
+			return false;
+		}
+		
+		playerOut = plugin.getWB().getPlayerOut(size);
+		for(Player p : playerOut){
+			sender.sendMessage(p.getName() + " est à " + plugin.getWB().getDistBorder(p, size) + " bloc de la limite.");
+		}
 		return true;
 	}
 	

@@ -1,1 +1,36 @@
+## [FR] Paramètre de langue, languageVer doit être augmenté de 0.1 si une langue est ajouté ou updaté.
+## [EN] Language parameter, languageVer must be increment by 0.1 if one language is updated or created.
 language: fr-FR
+languageVer: 0.1
+
+## [FR] Confiration de la bordure
+## [EN] Border Config
+BorderCenter:
+  XCenter: 0
+  ZCenter: 0
+BorderSize: 2000
+TimeToReduce: 30 # [FR] Temp que mettra la bordure à réduire
+DamageBuffer: 2000 # [FR] Distance à partir de laquelle le joueur prendra des dégats
+DamageTaken: 0
+
+## [FR] Règle quand un joueur est hors bordure
+TeleportIfNotInBorder: true
+RandomTeamTeleport: true
+
+## [FR] Programmation des changement de temps de bordure
+## [EN] Programming border change
+BorderChangeRepeat: 60 # Time in second to repeat Border Changing if force = true and player are out of border
+BorderChange:
+  - time: 60		# in minute
+    size: 1500		# in bloc
+    force: true		# boolean, force Border Changing even if some player are out
+  - time: 80
+    size: 1000
+    force: true
+
+
+Team:
+  -
+
+SpawnPoints:
+  - 
